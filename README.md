@@ -8,31 +8,28 @@
 
 ## Demo
 
-- **When All Field are checked**
-  <img src = "public/webDemo/landingPage.png"  >
+- **Landing Page initially**
+  <img src = "public/webDemo/landing-page-intial"  >
 
-- **When Title, Author, Status and Action are checked**
-  <img src = "public/webDemo/landingPageTwo.png"  >
+- **Landing page during test time**
+  <img src = "public/webDemo/landing-page-during-test.png"  >
 
-- **When Title has unchecked**
-  <img src = "public/webDemo/landingPageThree.png"  >
-
-- **When Title has again checked**
-  <img src = "public/webDemo/landingPageFour.png"  >
+- **Add Spelling mistake word input page**
+  <img src = "public/webDemo/add-spell-input-page.png"  >
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/SYShopnil/TechnoFix-Task.git
+  git clone https://github.com/SYShopnil/Spell-Check-App.git
 ```
 
 Go to the project directory
 
 ```bash
   cd
-  TechnoFix-Task
+  Spell-Check-App
 ```
 
 Install dependencies
@@ -45,6 +42,16 @@ Start the server
 
 ```bash
   npm run dev
+```
+
+Run int the production
+
+```bash
+  npm run build
+```
+
+```bash
+  npm run start
 ```
 
 Start the StoryBook
