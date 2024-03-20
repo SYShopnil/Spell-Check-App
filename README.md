@@ -9,7 +9,7 @@
 ## Demo
 
 - **Landing Page initially**
-  <img src = "public/webDemo/landing-page-intial"  >
+  <img src = "public/webDemo/landing-page-intial.png"  >
 
 - **Landing page during test time**
   <img src = "public/webDemo/landing-page-during-test.png"  >
