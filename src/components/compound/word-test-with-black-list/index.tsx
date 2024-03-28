@@ -4,27 +4,21 @@ import { BtnColorSchema } from '@src/types/root';
 import { IconName } from '@src/types/root/_icon';
 import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
+import { IWordTestWithBlackList } from '@src/types/compound';
 
-export const WordTestWIthBlackList = () => {
+export const WordTestWIthBlackList = ({
+  answerSubmitHandler,
+  currentActiveWord,
+  rootLocalStorageList,
+  isRightAnswer,
+  nextButtonHandler,
+}: IWordTestWithBlackList) => {
   const [blackList, setBlackList] = useState<string[]>([]);
-  const [rootLocalStorageList, setRootLocalStorageList] = useState<string[]>(
-    []
-  );
   const [inNextBtnHover, setIsNextBtnHover] = useState<boolean>(false);
   const [customizedLocalStorageList, setCustomizedLocalStorageList] = useState<
     string[]
   >([]);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [currentActiveWord, setCurrentActiveWord] =
-    useState<string>('colleague');
   const [answerInput, setAnswerInput] = useState<string>('');
-  const [isRightAnswer, setIsRightAnswer] = useState<boolean | null>(null);
-  const answerSubmitHandler = () => {
-    currentActiveWord.toLowerCase() == answerInput.toLowerCase()
-      ? setIsRightAnswer(true)
-      : setIsRightAnswer(false);
-  };
-
   const addToBackListHandler = () => {
     const isAlreadyAvailable = new Set(blackList).has(currentActiveWord);
     !isAlreadyAvailable && setBlackList([...blackList, currentActiveWord]);
@@ -38,33 +32,6 @@ export const WordTestWIthBlackList = () => {
       alert('Text-to-speech not supported in this browser');
     }
   };
-  const setActiveIndexAndCurrentActiveWord: (list: string[]) => void = (
-    list
-  ) => {
-    const getRadomArrayIndex = Math.floor(Math.random() * list.length);
-    setActiveIndex(getRadomArrayIndex);
-    setCurrentActiveWord(list[getRadomArrayIndex]);
-    list.splice(getRadomArrayIndex, 1);
-    setCustomizedLocalStorageList(list);
-  };
-  const nextButtonHandler = () => {
-    setActiveIndexAndCurrentActiveWord(customizedLocalStorageList);
-    setAnswerInput('');
-    setIsRightAnswer(null);
-  };
-
-  useEffect(() => {
-    const getFullList =
-      localStorage.getItem(ELocalStorageKey.SpellCheckList) &&
-      JSON.parse(localStorage.getItem(ELocalStorageKey.SpellCheckList) || '');
-    if (getFullList) {
-      setRootLocalStorageList(getFullList);
-      setActiveIndexAndCurrentActiveWord(
-        JSON.parse(localStorage.getItem(ELocalStorageKey.SpellCheckList) || '')
-      );
-    }
-  }, []);
-
   return (
     <div className={`grid grid-cols-12 gap-4`}>
       <div className={`col-span-12 md:col-span-8 bg-white p-5 space-y-3`}>
@@ -139,6 +106,8 @@ export const WordTestWIthBlackList = () => {
           </div>
         </div>
       </div>
+
+      {/* black list part */}
       <div className={`col-span-12  md:col-span-4 bg-white p-8  `}>
         <div className={`text-center`}>
           <p className={`bg-white text-xl font-bold`}>Black List</p>
