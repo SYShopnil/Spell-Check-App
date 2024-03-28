@@ -6,19 +6,47 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import { IWordTestWithBlackList } from '@src/types/compound';
 
+const demoData = [
+  {
+    words: ['arise', 'growth'],
+    createAt: Date.now(),
+  },
+];
+
 export const WordTestWIthBlackList = ({
   answerSubmitHandler,
   currentActiveWord,
   rootLocalStorageList,
   isRightAnswer,
   nextButtonHandler,
+  mode,
+  answerWordList,
+  customizedLocalStorageList,
 }: IWordTestWithBlackList) => {
+  let defaultAnswerInputField: string | string[] = [];
+  switch (mode) {
+    case ELocalStorageKey.LexicalResourcesList: {
+      const cloneOfDefaultAnswerInputField = defaultAnswerInputField;
+      answerWordList?.forEach(() => {
+        cloneOfDefaultAnswerInputField.push('');
+      });
+      break;
+    }
+    case ELocalStorageKey.SpellCheckList: {
+      defaultAnswerInputField = '';
+      break;
+    }
+    default: {
+      defaultAnswerInputField = '';
+    }
+  }
   const [blackList, setBlackList] = useState<string[]>([]);
   const [inNextBtnHover, setIsNextBtnHover] = useState<boolean>(false);
-  const [customizedLocalStorageList, setCustomizedLocalStorageList] = useState<
-    string[]
-  >([]);
-  const [answerInput, setAnswerInput] = useState<string>('');
+
+  const [answerInput, setAnswerInput] = useState<string | string[]>(
+    defaultAnswerInputField
+  );
+
   const addToBackListHandler = () => {
     const isAlreadyAvailable = new Set(blackList).has(currentActiveWord);
     !isAlreadyAvailable && setBlackList([...blackList, currentActiveWord]);
@@ -59,7 +87,7 @@ export const WordTestWIthBlackList = ({
             <Button
               btnText="Submit"
               colorSchema={BtnColorSchema.SolidBgWhiteTextGreen}
-              clickHandler={answerSubmitHandler}
+              clickHandler={() => answerSubmitHandler(answerInput)}
               isArrow={true}
             />
             {isRightAnswer !== null &&
@@ -94,7 +122,12 @@ export const WordTestWIthBlackList = ({
             </span>
             <span
               className={`flex justify-center items-center cursor-pointer   bg-[#7A67EE] hover:bg-[#FFFFFF]  duration-[0.5s] rounded-full p-3 shadow-primary`}
-              onClick={() => nextButtonHandler()}
+              onClick={() => {
+                if (currentActiveWord) {
+                  nextButtonHandler();
+                  setAnswerInput('');
+                }
+              }}
               onMouseEnter={() => setIsNextBtnHover(true)}
               onMouseLeave={() => setIsNextBtnHover(false)}
             >
