@@ -13,37 +13,36 @@ export const LandingPageView = () => {
   const [customizedLocalStorageList, setCustomizedLocalStorageList] = useState<
     string[]
   >([]);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  // const [activeIndex, setActiveIndex] = useState<number>(0);
   const [currentActiveWord, setCurrentActiveWord] =
     useState<string>('colleague');
-  const [answerInput, setAnswerInput] = useState<string>('');
+
   const [isRightAnswer, setIsRightAnswer] = useState<boolean | null>(null);
-  const answerSubmitHandler = () => {
-    currentActiveWord.toLowerCase() == answerInput.toLowerCase()
-      ? setIsRightAnswer(true)
-      : setIsRightAnswer(false);
+  const answerSubmitHandler = (answerInput: string | string[]) => {
+    // for spellCheck time
+    typeof answerInput == 'string' &&
+      (currentActiveWord.toLowerCase() == answerInput.toLowerCase()
+        ? setIsRightAnswer(true)
+        : setIsRightAnswer(false));
   };
 
   const setActiveIndexAndCurrentActiveWord: (list: string[]) => void = (
     list
   ) => {
     const getRadomArrayIndex = Math.floor(Math.random() * list.length);
-    setActiveIndex(getRadomArrayIndex);
+    // setActiveIndex(getRadomArrayIndex);
     setCurrentActiveWord(list[getRadomArrayIndex]);
     list.splice(getRadomArrayIndex, 1);
     setCustomizedLocalStorageList(list);
   };
   const nextButtonHandler = () => {
     setActiveIndexAndCurrentActiveWord(customizedLocalStorageList);
-    setAnswerInput('');
     setIsRightAnswer(null);
   };
-
   useEffect(() => {
     const getFullList =
       localStorage.getItem(ELocalStorageKey.SpellCheckList) &&
       JSON.parse(localStorage.getItem(ELocalStorageKey.SpellCheckList) || '');
-    console.log(getFullList);
     if (getFullList) {
       setRootLocalStorageList(getFullList);
       setActiveIndexAndCurrentActiveWord(
@@ -63,6 +62,8 @@ export const LandingPageView = () => {
                 isRightAnswer={isRightAnswer}
                 nextButtonHandler={nextButtonHandler}
                 rootLocalStorageList={rootLocalStorageList}
+                mode={ELocalStorageKey.SpellCheckList}
+                customizedLocalStorageList={customizedLocalStorageList}
               />
             </div>
           ) : (
