@@ -1,4 +1,7 @@
-import { MockWordTestWIthBlackList } from '@root/__mock-props__/component/compound/word-test-with-black-list';
+import {
+  MockWordTestWIthBlackListDemoOne,
+  MockWordTestWIthBlackListDemoTwo,
+} from '@root/__mock-props__/component/compound/word-test-with-black-list';
 import { WordInputBox, WordTestWIthBlackList } from '@src/components/compound';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
@@ -29,4 +32,14 @@ const WordTestWIthBlackListTemplate: ComponentStory<
  *
  */
 export const WordTestWIthBlackListDemo = WordTestWIthBlackListTemplate.bind({});
-WordTestWIthBlackListDemo.args = MockWordTestWIthBlackList;
+WordTestWIthBlackListDemo.args = MockWordTestWIthBlackListDemoOne;
+
+/**
+ *
+ * Demo two
+ *
+ */
+export const WordTestWIthBlackListDemoTwo = WordTestWIthBlackListTemplate.bind(
+  {}
+);
+WordTestWIthBlackListDemoTwo.args = MockWordTestWIthBlackListDemoTwo;
