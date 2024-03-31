@@ -8,7 +8,10 @@ export const LexicalResourceAddView = () => {
   return (
     <Layout mode={EMode.GiveNewSpellMistakeInput}>
       <div className={`mt-[5%]`}>
-        <WordInputBox mode={ELocalStorageKey.LexicalResourcesList} />
+        <WordInputBox
+          mode={ELocalStorageKey.LexicalResourcesList}
+          title="Add Word"
+        />
       </div>
     </Layout>
   );

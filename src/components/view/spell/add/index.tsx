@@ -8,7 +8,7 @@ export const AddSpellInputView = () => {
   return (
     <Layout mode={EMode.GiveNewSpellMistakeInput}>
       <div className={`mt-[5%]`}>
-        <WordInputBox mode={ELocalStorageKey.SpellCheckList} />
+        <WordInputBox mode={ELocalStorageKey.SpellCheckList} title="Add Word" />
       </div>
     </Layout>
   );
