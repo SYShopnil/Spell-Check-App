@@ -27,4 +27,4 @@ const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
  * DYnamic Check box Demos
  *
  */
-export const DynamicCheckBoxDemo = LandingPageViewTemplate.bind({});
+// export const DynamicCheckBoxDemo = LandingPageViewTemplate.bind({});

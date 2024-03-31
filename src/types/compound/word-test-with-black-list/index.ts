@@ -1,6 +1,6 @@
 import { ELocalStorageKey } from '@src/types/common';
 
-interface ILexicalSchema {
+export interface ILexicalSchema {
   words: string[];
   createAt: number;
 }

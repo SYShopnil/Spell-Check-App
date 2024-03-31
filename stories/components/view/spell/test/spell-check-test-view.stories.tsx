@@ -17,7 +17,7 @@ const SpellCheckTestViewTemplate: ComponentStory<typeof SpellCheckTestView> = (
 ) => {
   return (
     <div>
-      <LandingPageView />
+      <SpellCheckTestView />
     </div>
   );
 };

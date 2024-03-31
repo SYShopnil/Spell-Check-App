@@ -4,11 +4,11 @@ import { ELocalStorageKey } from '@src/types/common';
 import { EMode } from '@src/types/view/landing';
 import React from 'react';
 
-export const AddSpellInputView = () => {
+export const LexicalResourceAddView = () => {
   return (
     <Layout mode={EMode.GiveNewSpellMistakeInput}>
       <div className={`mt-[5%]`}>
-        <WordInputBox mode={ELocalStorageKey.SpellCheckList} />
+        <WordInputBox mode={ELocalStorageKey.LexicalResourcesList} />
       </div>
     </Layout>
   );
