@@ -8,9 +8,12 @@ import React from 'react';
 export const Layout = ({ children, mode }: ILandingPageLayout) => {
   const route = useRouter();
   const btnClickHandler = () => {
-    if (mode == EMode.Home) {
+    if (mode == EMode.GiveSpellMistakeTest) {
       route.push('/spell/add');
-    } else if (mode == EMode.Create) {
+    } else if (
+      mode == EMode.GiveNewSpellMistakeInput ||
+      mode == EMode.GiveLexicalResourceTest
+    ) {
       route.push('/');
     }
   };

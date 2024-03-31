@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import 'tailwindcss/tailwind.css';
 
 export default {
-  title: 'Component/View/AddSpellInput',
+  title: 'Component/View/Spell/Add',
   component: AddSpellInputView,
 } as ComponentMeta<typeof AddSpellInputView>;
 
@@ -12,15 +12,14 @@ export default {
  * view Template
  *
  */
-const AddSpellInputViewTemplate: ComponentStory<typeof AddSpellInputView> = (
-  arg
-) => {
-  return (
-    <div>
-      <AddSpellInputView />
-    </div>
-  );
-};
+const AddSpellInputViewTemplate: ComponentStory<typeof AddSpellInputView> =
+  () => {
+    return (
+      <div>
+        <AddSpellInputView />
+      </div>
+    );
+  };
 
 /**
  *

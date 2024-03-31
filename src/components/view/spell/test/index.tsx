@@ -2,10 +2,11 @@ import { WordTestWIthBlackList } from '@src/components/compound';
 import { Layout } from '@src/components/layout';
 import { EMode } from '@src/types/view/landing';
 import React, { useState, useEffect } from 'react';
-import { StartButton } from '../../root/start-button';
-import { ELocalStorageKey } from '@src/types/common';
 
-export const LandingPageView = () => {
+import { ELocalStorageKey } from '@src/types/common';
+import { StartButton } from '@src/components/root';
+
+export const SpellCheckTestView = () => {
   const [isTestStart, setIsTestStart] = useState(false);
   const [rootLocalStorageList, setRootLocalStorageList] = useState<string[]>(
     []
@@ -52,8 +53,8 @@ export const LandingPageView = () => {
   }, []);
   return (
     <>
-      <Layout mode={EMode.Home}>
-        {/* <div>
+      <Layout mode={EMode.GiveSpellMistakeTest}>
+        <div>
           {isTestStart ? (
             <div>
               <WordTestWIthBlackList
@@ -76,7 +77,7 @@ export const LandingPageView = () => {
               />
             </div>
           )}
-        </div> */}
+        </div>
       </Layout>
     </>
   );

@@ -4,7 +4,9 @@
  */
 
 export enum EMode {
-  Create = 'Create',
+  GiveNewSpellMistakeInput = 'GiveNewSpellMistakeInput',
+  GiveSpellMistakeTest = 'GiveSpellMistakeTest',
+  GiveLexicalResourceTest = 'GiveLexicalResourceTest',
   Home = 'Home',
 }
 export interface ILandingLayout {

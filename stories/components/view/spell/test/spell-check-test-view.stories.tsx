@@ -1,18 +1,18 @@
-import { LandingPageView } from '@src/components/view';
+import { LandingPageView, SpellCheckTestView } from '@src/components/view';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import 'tailwindcss/tailwind.css';
 
 export default {
   title: 'Component/View/Spell/Test',
-  component: LandingPageView,
-} as ComponentMeta<typeof LandingPageView>;
+  component: SpellCheckTestView,
+} as ComponentMeta<typeof SpellCheckTestView>;
 
 /**
  *
  * Landing Page view Template
  *
  */
-const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
+const SpellCheckTestViewTemplate: ComponentStory<typeof SpellCheckTestView> = (
   arg
 ) => {
   return (
@@ -27,4 +27,4 @@ const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
  * DYnamic Check box Demos
  *
  */
-export const DynamicCheckBoxDemo = LandingPageViewTemplate.bind({});
+export const SpellCheckTestViewDemoOne = SpellCheckTestViewTemplate.bind({});
