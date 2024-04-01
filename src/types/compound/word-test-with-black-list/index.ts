@@ -13,4 +13,5 @@ export interface IWordTestWithBlackList {
   mode: ELocalStorageKey;
   answerWordList?: string[];
   customizedLocalStorageList: string[] | ILexicalSchema[];
+  message?: string;
 }

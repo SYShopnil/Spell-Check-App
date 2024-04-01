@@ -15,6 +15,7 @@ export const WordTestWIthBlackList = ({
   mode,
   answerWordList,
   customizedLocalStorageList,
+  message,
 }: IWordTestWithBlackList) => {
   let defaultAnswerInputField: string[] | string = [];
 
@@ -153,7 +154,7 @@ export const WordTestWIthBlackList = ({
               (isRightAnswer == true ? (
                 <p>Right Answer</p>
               ) : (
-                <p>Wrong Answer</p>
+                <p>{message || 'Wrong Answer'}</p>
               ))}
           </div>
         </div>
@@ -184,7 +185,7 @@ export const WordTestWIthBlackList = ({
               onClick={() => {
                 if (currentActiveWord) {
                   nextButtonHandler();
-                  setAnswerInput('');
+                  setAnswerInput(defaultAnswerInputField);
                 }
               }}
               onMouseEnter={() => setIsNextBtnHover(true)}

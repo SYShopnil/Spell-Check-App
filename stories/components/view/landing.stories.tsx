@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import 'tailwindcss/tailwind.css';
 
 export default {
-  title: 'Component/View/Spell/Test',
+  title: 'Component/View/Landing',
   component: LandingPageView,
 } as ComponentMeta<typeof LandingPageView>;
 
@@ -27,4 +27,4 @@ const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
  * DYnamic Check box Demos
  *
  */
-// export const DynamicCheckBoxDemo = LandingPageViewTemplate.bind({});
+export const LandingPAge = LandingPageViewTemplate.bind({});
