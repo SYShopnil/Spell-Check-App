@@ -2,33 +2,121 @@ import { Button, IconStore } from '@src/components/root';
 import { ELocalStorageKey } from '@src/types/common';
 import { BtnColorSchema } from '@src/types/root';
 import { IconName } from '@src/types/root/_icon';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.scss';
+import { IWordTestWithBlackList } from '@src/types/compound';
 
-export const WordTestWIthBlackList = () => {
+export const WordTestWIthBlackList = ({
+  answerSubmitHandler,
+  currentActiveWord,
+  rootLocalStorageList,
+  isRightAnswer,
+  nextButtonHandler,
+  mode,
+  answerWordList,
+  customizedLocalStorageList,
+  message,
+}: IWordTestWithBlackList) => {
+  let defaultAnswerInputField: string[] | string = [];
+
+  // set the default answer input field value dynamically based on mode
+  switch (mode) {
+    case ELocalStorageKey.LexicalResourcesList: {
+      defaultAnswerInputField = Array.isArray(answerWordList)
+        ? Array(answerWordList.length).fill('')
+        : '';
+      break;
+    }
+    case ELocalStorageKey.SpellCheckList: {
+      defaultAnswerInputField = '';
+      break;
+    }
+    default: {
+      defaultAnswerInputField = '';
+    }
+  }
+
   const [blackList, setBlackList] = useState<string[]>([]);
-  const [rootLocalStorageList, setRootLocalStorageList] = useState<string[]>(
-    []
-  );
   const [inNextBtnHover, setIsNextBtnHover] = useState<boolean>(false);
-  const [customizedLocalStorageList, setCustomizedLocalStorageList] = useState<
-    string[]
-  >([]);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [currentActiveWord, setCurrentActiveWord] =
-    useState<string>('colleague');
-  const [answerInput, setAnswerInput] = useState<string>('');
-  const [isRightAnswer, setIsRightAnswer] = useState<boolean | null>(null);
-  const answerSubmitHandler = () => {
-    currentActiveWord.toLowerCase() == answerInput.toLowerCase()
-      ? setIsRightAnswer(true)
-      : setIsRightAnswer(false);
+  const [answerInput, setAnswerInput] = useState<string | string[]>(
+    defaultAnswerInputField
+  );
+
+  const renderInputFieldDynamically = () => {
+    const commonWrapperStyle = `flex justify-start items-center basis-[85%]`;
+    switch (mode) {
+      case ELocalStorageKey.LexicalResourcesList: {
+        return (
+          <>
+            {Array.isArray(defaultAnswerInputField) && (
+              <React.Fragment>
+                {defaultAnswerInputField.map((_, ind) => {
+                  return (
+                    <div className={`${commonWrapperStyle}`} key={ind}>
+                      <input
+                        type="text"
+                        placeholder="Give Answer"
+                        value={answerInput.at(ind)}
+                        onChange={(e) => {
+                          const existingInputList: string[] | string =
+                            answerInput;
+                          Array.isArray(answerInput) &&
+                            (answerInput[ind] = e.target.value);
+                          Array.isArray(existingInputList) &&
+                            setAnswerInput([...existingInputList]);
+                        }}
+                        className={`w-[100%] focus:outline-none focus:border-primary focus:ring-priborder-primary border-gray-300 rounded-md p-2 border`}
+                      />
+                    </div>
+                  );
+                })}
+              </React.Fragment>
+            )}
+          </>
+        );
+      }
+      case ELocalStorageKey.SpellCheckList: {
+        return (
+          <div className={`${commonWrapperStyle}`}>
+            <input
+              type="text"
+              placeholder="Give Answer"
+              value={answerInput}
+              onChange={(e) => setAnswerInput(e.target.value)}
+              className={`w-[100%] focus:outline-none focus:border-primary focus:ring-priborder-primary border-gray-300 rounded-md p-2 border`}
+            />
+          </div>
+        );
+      }
+    }
   };
 
   const addToBackListHandler = () => {
-    const isAlreadyAvailable = new Set(blackList).has(currentActiveWord);
-    !isAlreadyAvailable && setBlackList([...blackList, currentActiveWord]);
+    switch (mode) {
+      case ELocalStorageKey.SpellCheckList: {
+        const isAlreadyAvailable = new Set(blackList).has(currentActiveWord);
+        !isAlreadyAvailable && setBlackList([...blackList, currentActiveWord]);
+        break;
+      }
+      case ELocalStorageKey.LexicalResourcesList: {
+        let createNewDataFormatToStoreInBlackList = [];
+        Array.isArray(answerWordList) &&
+          createNewDataFormatToStoreInBlackList.push(
+            currentActiveWord,
+            ...answerWordList
+          );
+        const stringVersionOfNewDataFormat =
+          createNewDataFormatToStoreInBlackList.join(' = ');
+        const isAlreadyAvailable = new Set(blackList).has(
+          stringVersionOfNewDataFormat
+        );
+        !isAlreadyAvailable &&
+          setBlackList([...blackList, stringVersionOfNewDataFormat]);
+        break;
+      }
+    }
   };
+
   const speakController = () => {
     if ('speechSynthesis' in window) {
       const synth = window.speechSynthesis;
@@ -38,35 +126,10 @@ export const WordTestWIthBlackList = () => {
       alert('Text-to-speech not supported in this browser');
     }
   };
-  const setActiveIndexAndCurrentActiveWord: (list: string[]) => void = (
-    list
-  ) => {
-    const getRadomArrayIndex = Math.floor(Math.random() * list.length);
-    setActiveIndex(getRadomArrayIndex);
-    setCurrentActiveWord(list[getRadomArrayIndex]);
-    list.splice(getRadomArrayIndex, 1);
-    setCustomizedLocalStorageList(list);
-  };
-  const nextButtonHandler = () => {
-    setActiveIndexAndCurrentActiveWord(customizedLocalStorageList);
-    setAnswerInput('');
-    setIsRightAnswer(null);
-  };
-
-  useEffect(() => {
-    const getFullList =
-      localStorage.getItem(ELocalStorageKey.SpellCheckList) &&
-      JSON.parse(localStorage.getItem(ELocalStorageKey.SpellCheckList) || '');
-    if (getFullList) {
-      setRootLocalStorageList(getFullList);
-      setActiveIndexAndCurrentActiveWord(
-        JSON.parse(localStorage.getItem(ELocalStorageKey.SpellCheckList) || '')
-      );
-    }
-  }, []);
 
   return (
     <div className={`grid grid-cols-12 gap-4`}>
+      {/* left part wrapper */}
       <div className={`col-span-12 md:col-span-8 bg-white p-5 space-y-3`}>
         {/* input part */}
         <div className={`flex space-x-4`}>
@@ -76,15 +139,7 @@ export const WordTestWIthBlackList = () => {
           >
             <IconStore iconName={IconName.AiOutlineSound} fill="#449657" />
           </div>
-          <div className={`flex justify-start items-center basis-[85%]`}>
-            <input
-              type="text"
-              placeholder="Give Answer"
-              value={answerInput}
-              onChange={(e) => setAnswerInput(e.target.value)}
-              className={`w-[100%] focus:outline-none focus:border-primary focus:ring-priborder-primary border-gray-300 rounded-md p-2 border`}
-            />
-          </div>
+          {renderInputFieldDynamically()}
         </div>
         {/* submit button part */}
         <div className={`flex justify-center items-center`}>
@@ -92,14 +147,14 @@ export const WordTestWIthBlackList = () => {
             <Button
               btnText="Submit"
               colorSchema={BtnColorSchema.SolidBgWhiteTextGreen}
-              clickHandler={answerSubmitHandler}
+              clickHandler={() => answerSubmitHandler(answerInput)}
               isArrow={true}
             />
             {isRightAnswer !== null &&
               (isRightAnswer == true ? (
                 <p>Right Answer</p>
               ) : (
-                <p>Wrong Answer</p>
+                <p>{message || 'Wrong Answer'}</p>
               ))}
           </div>
         </div>
@@ -127,7 +182,12 @@ export const WordTestWIthBlackList = () => {
             </span>
             <span
               className={`flex justify-center items-center cursor-pointer   bg-[#7A67EE] hover:bg-[#FFFFFF]  duration-[0.5s] rounded-full p-3 shadow-primary`}
-              onClick={() => nextButtonHandler()}
+              onClick={() => {
+                if (currentActiveWord) {
+                  nextButtonHandler();
+                  setAnswerInput(defaultAnswerInputField);
+                }
+              }}
               onMouseEnter={() => setIsNextBtnHover(true)}
               onMouseLeave={() => setIsNextBtnHover(false)}
             >
@@ -139,13 +199,15 @@ export const WordTestWIthBlackList = () => {
           </div>
         </div>
       </div>
+
+      {/* black list part */}
       <div className={`col-span-12  md:col-span-4 bg-white p-8  `}>
         <div className={`text-center`}>
           <p className={`bg-white text-xl font-bold`}>Black List</p>
         </div>
         <div className={`${styles.scrollContainer}`}>
           <div
-            className={`bg-white overflow-y-scroll  h-[9.5rem] ${styles.customScrollbar} `}
+            className={`bg-white overflow-y-scroll  h-[9.5rem] pr-4 ${styles.customScrollbar} `}
           >
             {blackList.length ? (
               <>

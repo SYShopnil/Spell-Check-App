@@ -4,10 +4,14 @@
  */
 
 export enum EMode {
-  Create = 'Create',
+  GiveNewSpellMistakeInput = 'GiveNewSpellMistakeInput',
+  GiveSpellMistakeTest = 'GiveSpellMistakeTest',
+  GiveLexicalResourceTest = 'GiveLexicalResourceTest',
+  GiveNewLexicalResourceInput = 'GiveNewLexicalResourceInput',
   Home = 'Home',
 }
 export interface ILandingLayout {
+  title?: string;
   children?: React.ReactElement;
   mode: EMode;
 }

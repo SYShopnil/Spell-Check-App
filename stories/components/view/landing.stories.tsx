@@ -12,9 +12,7 @@ export default {
  * Landing Page view Template
  *
  */
-const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
-  arg
-) => {
+const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = () => {
   return (
     <div>
       <LandingPageView />
@@ -27,4 +25,4 @@ const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
  * DYnamic Check box Demos
  *
  */
-export const DynamicCheckBoxDemo = LandingPageViewTemplate.bind({});
+export const LandingPAge = LandingPageViewTemplate.bind({});
