@@ -12,9 +12,7 @@ export default {
  * Landing Page view Template
  *
  */
-const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = (
-  arg
-) => {
+const LandingPageViewTemplate: ComponentStory<typeof LandingPageView> = () => {
   return (
     <div>
       <LandingPageView />

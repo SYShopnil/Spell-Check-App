@@ -2,7 +2,7 @@ import {
   MockWordTestWIthBlackListDemoOne,
   MockWordTestWIthBlackListDemoTwo,
 } from '@root/__mock-props__/component/compound/word-test-with-black-list';
-import { WordInputBox, WordTestWIthBlackList } from '@src/components/compound';
+import { WordTestWIthBlackList } from '@src/components/compound';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {

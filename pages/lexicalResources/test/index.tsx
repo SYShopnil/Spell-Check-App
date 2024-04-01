@@ -1,9 +1,6 @@
 import Head from 'next/head';
 
-import {
-  LexicalResourceTestView,
-  SpellCheckTestView,
-} from '@src/components/view';
+import { LexicalResourceTestView } from '@src/components/view';
 
 const SpellCheckTestPage = () => {
   return (

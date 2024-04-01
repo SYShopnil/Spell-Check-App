@@ -17,11 +17,11 @@ export const LexicalResourceTestView = () => {
   const [customizedLocalStorageList, setCustomizedLocalStorageList] = useState<
     ILexicalSchema[]
   >([]);
-  // const [activeIndex, setActiveIndex] = useState<number>(0);
   const [currentActiveWord, setCurrentActiveWord] =
     useState<string>('colleague');
 
   const [isRightAnswer, setIsRightAnswer] = useState<boolean | null>(null);
+
   const answerSubmitHandler = (answerInput: string | string[]) => {
     const expectedAnswer: string[] = rightAnswerList;
     const inputtedAnswer: string[] | string = answerInput;
@@ -74,10 +74,12 @@ export const LexicalResourceTestView = () => {
       setCustomizedLocalStorageList(cloneOfList);
     }
   };
+
   const nextButtonHandler = () => {
     setActiveIndexAndCurrentActiveWord(customizedLocalStorageList);
     setIsRightAnswer(null);
   };
+
   useEffect(() => {
     const getFullList =
       localStorage.getItem(ELocalStorageKey.LexicalResourcesList) &&

@@ -1,4 +1,3 @@
-import { AddSpellInputView } from '@src/components/view';
 import { LexicalResourceAddView } from '@src/components/view/lexicalResources/add';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import 'tailwindcss/tailwind.css';

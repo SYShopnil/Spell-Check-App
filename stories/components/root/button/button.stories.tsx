@@ -1,4 +1,3 @@
-import { mock_data_redirectButton } from '@root/__mock-props__/component/root/button';
 import { Button } from '@src/components/root';
 import { BtnColorSchema } from '@src/types/root';
 import { ComponentMeta, ComponentStory } from '@storybook/react';

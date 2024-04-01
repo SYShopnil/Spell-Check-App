@@ -14,7 +14,7 @@ export default {
  */
 const LexicalResourceTestViewTemplate: ComponentStory<
   typeof LexicalResourceTestView
-> = (arg) => {
+> = () => {
   return (
     <div>
       <LexicalResourceTestView />

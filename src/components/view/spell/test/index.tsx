@@ -14,11 +14,11 @@ export const SpellCheckTestView = () => {
   const [customizedLocalStorageList, setCustomizedLocalStorageList] = useState<
     string[]
   >([]);
-  // const [activeIndex, setActiveIndex] = useState<number>(0);
   const [currentActiveWord, setCurrentActiveWord] =
     useState<string>('colleague');
 
   const [isRightAnswer, setIsRightAnswer] = useState<boolean | null>(null);
+
   const answerSubmitHandler = (answerInput: string | string[]) => {
     // for spellCheck time
     typeof answerInput == 'string' &&
@@ -31,7 +31,6 @@ export const SpellCheckTestView = () => {
     list
   ) => {
     const getRadomArrayIndex = Math.floor(Math.random() * list.length);
-    // setActiveIndex(getRadomArrayIndex);
     setCurrentActiveWord(list[getRadomArrayIndex]);
     list.splice(getRadomArrayIndex, 1);
     setCustomizedLocalStorageList(list);
@@ -40,6 +39,7 @@ export const SpellCheckTestView = () => {
     setActiveIndexAndCurrentActiveWord(customizedLocalStorageList);
     setIsRightAnswer(null);
   };
+
   useEffect(() => {
     const getFullList =
       localStorage.getItem(ELocalStorageKey.SpellCheckList) &&
@@ -51,6 +51,7 @@ export const SpellCheckTestView = () => {
       );
     }
   }, []);
+
   return (
     <>
       <Layout mode={EMode.GiveSpellMistakeTest}>

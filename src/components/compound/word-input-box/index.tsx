@@ -154,6 +154,7 @@ export const WordInputBox = ({ mode, title }: IWordInputBox) => {
                   inputOnChangeHandler={(e) => {
                     wordInputHandler(e, ind);
                   }}
+                  key={ind}
                 />
               );
             })}

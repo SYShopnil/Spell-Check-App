@@ -1,9 +1,7 @@
-import { WordTestWIthBlackList } from '@src/components/compound';
 import { Layout } from '@src/components/layout';
 import { EMode } from '@src/types/view/landing';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StartButton } from '../../root/start-button';
-import { ELocalStorageKey } from '@src/types/common';
 import { useRouter } from 'next/router';
 import { EStartButtonVariant } from '@src/types/root';
 

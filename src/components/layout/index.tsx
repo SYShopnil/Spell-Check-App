@@ -15,25 +15,18 @@ export const Layout = ({ children, mode, title }: ILandingPageLayout) => {
   useEffect(() => {
     switch (mode) {
       case EMode.Home: {
-        // btnHandler.isVisible = false;
         setBtnHandler({ ...btnHandler, isVisible: false });
         break;
       }
       case EMode.GiveLexicalResourceTest: {
-        // btnHandler.isVisible = true;
-        // btnHandler.title = 'Add Lexical Words';
         setBtnHandler({ isVisible: true, title: 'Add Lexical Words' });
         break;
       }
       case EMode.GiveSpellMistakeTest: {
-        // btnHandler.isVisible = true;
-        // btnHandler.title = 'Add Word';
         setBtnHandler({ isVisible: true, title: 'Add Word' });
         break;
       }
       case EMode.GiveNewLexicalResourceInput: {
-        // btnHandler.isVisible = true;
-        // btnHandler.title = 'Go to Home';
         setBtnHandler({ isVisible: true, title: 'Go to Home' });
         break;
       }
@@ -53,7 +46,6 @@ export const Layout = ({ children, mode, title }: ILandingPageLayout) => {
     ) {
       route.push('/');
     } else if (mode == EMode.GiveLexicalResourceTest) {
-      console.log(`It hitted`);
       route.push('/lexicalResources/add');
     }
   };

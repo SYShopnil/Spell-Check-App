@@ -1,4 +1,4 @@
-import { LandingPageView, SpellCheckTestView } from '@src/components/view';
+import { SpellCheckTestView } from '@src/components/view';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import 'tailwindcss/tailwind.css';
 
@@ -12,15 +12,14 @@ export default {
  * Landing Page view Template
  *
  */
-const SpellCheckTestViewTemplate: ComponentStory<typeof SpellCheckTestView> = (
-  arg
-) => {
-  return (
-    <div>
-      <SpellCheckTestView />
-    </div>
-  );
-};
+const SpellCheckTestViewTemplate: ComponentStory<typeof SpellCheckTestView> =
+  () => {
+    return (
+      <div>
+        <SpellCheckTestView />
+      </div>
+    );
+  };
 
 /**
  *
